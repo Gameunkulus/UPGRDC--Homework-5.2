@@ -3,47 +3,41 @@
 
 #include <iostream>
 #include <set>;
-#include <list>;
-#include <map>;
 
 using namespace std;
 
 class Counter {
 protected:
-    string text;
-    multimap< int, char, greater<int> > my_map;
-    set<char> my_set1;
+
+    int num = 0;
+    set<int, greater<>> my_set1;
 
 public:
-    Counter(string text) {
-        this->text = text;
-        int length = text.length();
-        for (int i = 0; i < length; i++) {
-            my_set1.insert(text[i]);
+
+    Counter(int num, int *arr) {
+        this->num = num;
+        for (int i = 0; i < num; i++) {
+            my_set1.insert(arr[i]);
         }
-    };
-
-    void sortByText() {
-
-
-        for (auto& i : text) {
-            int repeatNum = count(text.begin(), text.end(), i);
-            my_map.emplace(repeatNum, i);
-        };
-
     };
 
     void printList() {
         cout << "[OUT]: " << endl;
-        for (auto& i : my_map)
+        for (const auto& i : my_set1)
         {
-            cout << i.first << ": " << i.second << endl;
+            cout << i << endl;
         }
     };
 };
 
 int main()
 {
+
+    int numCount = 6;
+    int arr[6] = { 1, 5, 1, 3, 4, 4 };
+
+    Counter counter(numCount, arr);
+    counter.printList();
     std::cout << "Hello World!\n";
 }
 
